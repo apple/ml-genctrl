@@ -1,0 +1,24 @@
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+defaults:
+  - base_t2i
+  - _self_
+
+model_name: black-forest-labs/FLUX.1-schnell  # Required
+
+# Task configuration
+task_name: saturation  # Base task name
+initial_states:
+  initial_states_str: empty #mistralai/Mistral-7B-Instruct-v0.1  # Options: a language model or a tag that's in initial_states_factory
+
+input_space:
+  start: 0.0
+  end: 1.0
+
+output_map:
+  output_map_str: saturation
+  modality: image
+
+problem_type: quantized  # Options: "quantized", "discrete", "continuous"
+time_steps: 1  # Required, time horizon T

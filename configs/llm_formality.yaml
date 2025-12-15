@@ -1,0 +1,26 @@
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+defaults:
+  - base_llm
+  - _self_
+
+model_name: google/gemma-3-4b-it
+
+# Task configuration
+task_name: formality  # Base task name
+initial_states:
+  initial_states_str: "empty" # mistralai/Mistral-7B-Instruct-v0.1  # Options: a language model or a tag that's in initial_states_factory, e.g., "empty"
+  instruction_tuned: true  # Whether to use instruction-tuned prompts
+  num_shots: 0  # Number of few-shot examples: 0 or 5
+  use_system_prompt: false  # Whether to use system prompt for few-shot examples
+
+input_space:
+  start: 0.0
+  end: 1.0
+
+output_map:
+  output_map_str: s-nlp/roberta-base-formality-ranker  # Required
+
+problem_type: quantized  # Options: "quantized", "discrete", "continuous"
+time_steps: 5  # Required, time horizon T

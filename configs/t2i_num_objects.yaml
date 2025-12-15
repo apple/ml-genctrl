@@ -1,0 +1,33 @@
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+defaults:
+  - base_t2i
+  - _self_
+
+model_name: black-forest-labs/FLUX.1-schnell  # Required
+
+# Task configuration
+task_name: white_bg_objects  # Base task name
+initial_states:
+  initial_states_str: empty #mistralai/Mistral-7B-Instruct-v0.1  # Options: a language model or a tag that's in initial_states_factory
+
+input_space:
+  obj: "cat" # you can also change it to "ball" or any other class.
+  start: 0
+  end: 20
+
+output_map:
+  output_map_str: google/owlv2-base-patch16-ensemble
+  modality: image
+  question: ${input_space.obj}
+  bounds: ${range_set:${input_space.start},${input_space.end}}
+
+model_config:
+  num_images_per_prompt: 1
+  gen_batch_size: 4
+  output_dir: /tmp/images
+  seed: 42
+
+problem_type: discrete  # Options: "quantized", "discrete", "continuous"
+time_steps: 1  # Required, time horizon T

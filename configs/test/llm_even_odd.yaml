@@ -1,0 +1,11 @@
+# @package _global_
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+# Test config for LLM even_odd task using mock model
+
+defaults:
+  - /llm_even_odd
+  - _self_
+
+model_name: mock-llm  # Use mock instead of real model

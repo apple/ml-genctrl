@@ -1,0 +1,23 @@
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+repos:
+  - repo: local
+    hooks:
+      - id: pytest-check
+        stages: [pre-push]
+        name: pytest-check
+        entry: pytest -m "not slow"
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.9.6
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [--fix]
+      # Run the formatter.
+      - id: ruff-format

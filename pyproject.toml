@@ -1,0 +1,102 @@
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+[project]
+name = "genctrl"
+version = "0.0.1"
+description = "Testing reachability and controllability of Generative AI models."
+readme = "README.rst"
+authors = [
+  { name = "Emily Cheng", email = "emilyshana.cheng@upf.edu" },
+  { name = "Xavier Suau", email = "xsuaucuadros@apple.com" },
+]
+license = { text = "Apple Sample Code License" }
+requires-python = "== 3.11.*"
+dependencies = [
+  "torch",
+  "torchvision",
+  "transformers<=4.56.2",
+  "diffusers<=0.35.0",
+  "accelerate",
+  "blobfile",
+  "datasets",
+  "pre-commit",
+  "scikit-learn",
+  "pandas",
+  "dotenv",
+  "black",
+  "wandb",
+  "numpy<2",            # compatibility with hydra-core
+  "pytest",
+  "hydra-core",
+  "matplotlib>=3.10.1",
+  "inflect",  # plurals generation
+  "sentencepiece",  # for Flux
+  "dm-tree",
+]
+
+[project.urls]
+homepage = "https://github.com/apple/ml-genctrl"
+
+[tool.ruff.lint]
+select = [
+  # # pycodestyle
+  # "E",
+  # # Pyflakes
+  # "F",
+  # # pyupgrade
+  # "UP",
+  # # flake8-bugbear
+  # "B",
+  # # flake8-simplify
+  # "SIM",
+  # isort
+  "I",
+]
+
+# Below taken from https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+[tool.setuptools.packages.find]
+where = ["."] # list of folders that contain the packages (["."] by default)
+include = [
+  "scripts",
+  "genctrl",
+] # package names should match these glob patterns (["*"] by default)
+exclude = [
+  "tests*",
+] # exclude packages matching these glob patterns (empty by default)
+namespaces = false # to disable scanning PEP 420 namespaces (true by default)
+
+[tool.pytest.ini_options]
+pythonpath = [ # Adds code path to pytest
+  ".",
+]
+addopts = "--capture=no" # Don't capture stdout/stderr (default: "auto")
+
+[tool.isort]
+profile = "black" # Sets isort to use Black-compatible formatting
+
+[tool.uv.sources]
+genctrl = { workspace = true }
+torch = [
+  { index = "pytorch-cu126", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+  { index = "pytorch-cu126", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu124" # 124 and not 126 because of https://github.com/astral-sh/uv/issues/11945 (torch issue)
+explicit = true
+
+[dependency-groups]
+dev = [
+  "genctrl",
+  "ipykernel>=6.29.5",
+  "pytest",
+  "ruff",
+]
+
+[build-system]
+requires = ["setuptools", "wheel", "setuptools_scm[toml]"]
+build-backend = "setuptools.build_meta"

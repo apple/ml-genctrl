@@ -1,0 +1,27 @@
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+defaults:
+  - base_llm
+    #  - _self_
+
+model_name: google/gemma-3-4b-it
+
+# Task configuration
+task_name: num_chars  # Base task name
+initial_states:
+  initial_states_str: "empty" # mistralai/Mistral-7B-Instruct-v0.1  # Options: a language model or a tag that's in initial_states_factory, e.g., "empty"
+  instruction_tuned: true  # Whether to use instruction-tuned prompts
+  num_shots: 0  # Number of few-shot examples: 0 or 5
+  use_system_prompt: false  # Whether to use system prompt for few-shot examples
+
+input_space:
+  start: 1
+  end: 20
+
+output_map:
+  output_map_str: num_chars  # Required
+  bounds: ${range_set:${input_space.start},${input_space.end}}
+
+problem_type: discrete  # Options: "quantized", "discrete", "continuous"
+time_steps: 5  # Required, time horizon T

@@ -1,0 +1,37 @@
+# For licensing see accompanying LICENSE file.
+# Copyright (C) 2025 Apple Inc. All Rights Reserved.
+
+initial_states:
+  input_prompt: Imagine you are a user about to ask a question to a chatbot. Say your opening greeting and only the greeting.
+  sampling_config:
+    temperature: 0.9
+    top_p: 0.95
+    do_sample: true
+    return_full_text: false
+output_dir: ${oc.env:OUTPUT_DIR, /tmp/genctrl}
+output_file: null
+model_cache: ${oc.env:DATA_DIR, /tmp/genctrl}
+time_steps: 1  # Required, time horizon T
+
+model_config:   # Optional dict config for sampling, can be overridden on command line
+  num_images_per_prompt: 1
+  gen_batch_size: 4
+  output_dir: /tmp/images
+  seed: 42
+
+reachability_params:
+  confidence: 0.05  # Optional, default is 0.05
+  p_min: 0.05  # Mandatory, default is 0.01
+  gamma: 0.1
+
+controllability_params:
+  partially_controllable: 0.1  # Optional, default is 0.1
+  confidence: 0.05  # Optional, default is 0.05
+  error: 0.05  # Optional, default is 0.05
+
+wandb:
+  project: genctrl
+  group: null
+  dir: ${oc.env:DATA_DIR, /tmp/cache}
+  entity: null
+  mode: disabled # options: offline, online, disabled
