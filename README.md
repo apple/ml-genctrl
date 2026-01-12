@@ -6,7 +6,7 @@
 
 This software project accompanies the research paper:
 
-> ### [A Formal Controllability Toolkit for Generative Models.](LINK)  [[Bibtex](#-citation)]
+> ### [GenCtrl -- A Formal Controllability Toolkit for Generative Models.](https://arxiv.org/abs/2601.05637)  [[Bibtex](#-citation)]
 >
 > Emily Cheng*, Carmen Amo Alonso, Federico Danieli, Arno Blaas, Luca Zappella, Pau Rodriguez and Xavier Suau.
 
@@ -220,9 +220,9 @@ If you use GenCtrl in your research, please cite:
 
 ```bibtex
 @article{cheng-genctrl,
-  title={A Formal Controllability Toolkit for Generative Models},
+  title={GenCtrl -- A Formal Controllability Toolkit for Generative Models},
   author={Cheng, Emily and Amo Alonso, Carmen and Danieli, Federico and Blaas, Arno and Zappella, Luca and Rodriguez, Pau and Suau, Xavier},
-  journal={TBF},
+  journal={https://arxiv.org/abs/2601.05637},
   year={2025}
 }
 ```
